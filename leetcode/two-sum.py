@@ -5,9 +5,12 @@ class Solution(object):
         :type target: int
         :rtype: List[int]
         """
+        hashmap = {}
         for i in range(len(nums)):
+            if nums[i] not in hashmap:
+                hashmap[nums[i]] = i
             temp = target - nums[i]
-            if temp in nums:
-                idx = nums.index(temp)
+            if temp in hashmap:
+                idx = hashmap[temp]
                 if idx != i:
                     return [i, idx]
