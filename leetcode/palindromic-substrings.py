@@ -1,20 +1,16 @@
-class Solution(object):
-    def checkPalindrome(self, string):
-        n = len(string)
-        mid = n // 2
-        if n % 2 == 0:  # even length
-            return string[:mid] == string[mid:][::-1]
-        else:  # odd length
-            return string[:mid] == string[mid+1:][::-1]
-
-    def countSubstrings(self, s):
-        """
-        :type s: str
-        :rtype: int
-        """
-        dp = [1] * len(s)
-        for i in range(1, len(s)):
-            for j in range(0, i):
-                if self.checkPalindrome(s[j:i+1]):
-                    dp[i] += 1
-        return sum(dp)
+class Solution:
+    def countSubstrings(self, s: str) -> int:
+        counter = 0
+        for i in range(len(s)):
+            l = r = i
+            while l >= 0 and r < len(s) and s[l] == s[r]:
+                counter += 1
+                l -= 1
+                r += 1
+            l = i
+            r = i + 1
+            while l >= 0 and r < len(s) and s[l] == s[r]:
+                counter += 1
+                l -= 1
+                r += 1
+        return counter
