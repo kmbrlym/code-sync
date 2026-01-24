@@ -1,9 +1,12 @@
 class Solution:
     def twoSum(self, numbers: List[int], target: int) -> List[int]:
-        idx = {}
-        for i in range(len(numbers)):
-            if numbers[i] not in idx:
-                idx[numbers[i]] = i
-            remaining = target - numbers[i]
-            if remaining in idx and idx[remaining] != i:
-                return [idx[remaining]+1, i+1]
+        l = 0
+        r = len(numbers) -1
+        while l < r:
+            total = numbers[l] + numbers[r]
+            if total == target:
+                return [l+1, r+1]
+            elif total > target:
+                r -= 1
+            else:
+                l += 1
